@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server-deployment
+spec:
+  replicas: 3
+  selector: # se conecta com o label
+    matchLabels:
+      component: server
+  template: #template for the pods
+    metadata:
+      labels:
+        component: server
+    spec:
+      containers:
+      - name: server
+        image: paulo1410/multi-server
+        ports:
+          - containerPort: 5000

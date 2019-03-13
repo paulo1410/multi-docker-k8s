@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+spec:
+  replicas: 1
+  selector: # se conecta com o label
+    matchLabels:
+      component: postgres
+  template: #template for the pods
+    metadata:
+      labels:
+        component: postgres
+    spec:
+      volumes:
+        - name: postres-storage
+          PersistentVolumeClaim:
+            claimNaime: database-persistent-volume-claim
+      containers:
+      - name: postgres
+        image: postgres
+        ports:
+          - containerPort: 5432
+        volumeMounts:
+          - name: postgre-storage
+            mouthPath: /var/lib/postgresql/data
+            subPath: postgres  #específico para postgress

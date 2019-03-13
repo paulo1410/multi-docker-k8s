@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-deployment
+spec:
+  replicas: 1
+  selector: # se conecta com o label
+    matchLabels:
+      component: worker
+  template: #template for the pods
+    metadata:
+      labels:
+        component: worker
+    spec:
+      containers:
+      - name: worker
+        image: paulo1410/multi-worker
