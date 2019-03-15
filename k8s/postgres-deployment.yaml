@@ -17,17 +17,17 @@ spec:
           persistentVolumeClaim:
             claimName: database-persistent-volume-claim
       containers:
-      - name: postgres
-        image: postgres
-        ports:
-          - containerPort: 5432
-        volumeMounts:
-          - name: postgres-storage
-            mountPath: /var/lib/postgresql/data
-            subPath: postgres  #específico para postgress
-        env:  #solicita que o postres use essa senha, ao invés da senha default
-          - name: PGPASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: pgpassword
-                key: PGPASSWORD
+        - name: postgres
+          image: postgres
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: postgres-storage
+              mountPath: /var/lib/postgresql/data
+              subPath: postgres  #específico para postgress
+          env:  #solicita que o postres use essa senha, ao invés da senha default
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pgpassword
+                  key: PGPASSWORD
